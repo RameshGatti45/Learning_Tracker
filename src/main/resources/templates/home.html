@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Learning Tracker</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        h1, h2 { color: #2c3e50; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        form { margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<h1>📚 Learning Tracker</h1>
+
+<!-- Add Subject Form -->
+<h2>Add a Subject</h2>
+<form method="post" action="/addSubject">
+    <input type="text" name="name" placeholder="e.g., Math" required>
+    <button type="submit">Add</button>
+</form>
+
+<!-- Log Study Time -->
+<h2>Log Study Time</h2>
+<form method="post" action="/logStudyTime">
+    <label>Select Subject:</label>
+    <select name="subjectId" required>
+        <option th:each="sub : ${subjects}" th:value="${sub.id}" th:text="${sub.name}"></option>
+    </select>
+    <input type="number" name="minutes" placeholder="Minutes" required>
+    <button type="submit">Log</button>
+</form>
+
+<!-- Show Study Sessions -->
+<h2>Study Sessions (Last 7 Days)</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Subject</th>
+        <th>Date</th>
+        <th>Minutes</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="study : ${sessions}">
+        <td th:text="${study.subject.name}"></td>
+        <td th:text="${study.date}"></td>
+        <td th:text="${study.minutesSpent}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
