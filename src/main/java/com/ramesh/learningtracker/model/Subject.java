@@ -11,6 +11,6 @@ public class Subject {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    // Subject name
     private String name;
 }
